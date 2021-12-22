@@ -1,0 +1,19 @@
+Some interesting FEN's to test with:
+
+Mate in two:
+K7/1Ppq1N1P/4NpBP/p1PQ1RP1/3Bn3/p5pr/2rPk1pP/7R w - - 0 1
+
+Starting position FEN:
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+
+FEN after 1.E4 C5:
+rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2
+
+Black to move and promote:
+5B1Q/P7/1Kp1Ppb1/8/1P1k3p/R3p3/2p1PPPq/8 b - - 0 1
+
+
+
+
+
+

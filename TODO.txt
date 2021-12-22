@@ -1,0 +1,7 @@
+Todo:
+    50 move rule
+    3 repetition draw
+    furthered piece value calculation
+    move tracking
+    Better code structure
+    future looking AI to play against
