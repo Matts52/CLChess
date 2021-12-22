@@ -1,3 +1,5 @@
+Simple command line chess program
+
 To run this project please type the following commands:
 
 1. If you would like to play a two-player game: $python CLChess.py
