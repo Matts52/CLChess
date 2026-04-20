@@ -131,9 +131,9 @@ def test_move(color, curr_board, move):
 		try:
 			if move[4] == 'P':
 				if color == 'White':
-					board[move[2]+'5'] = chess_pieces['blank']
-			else:
-				board[move[2]+'4'] = chess_pieces['blank']
+					curr_board[move[2]+'5'] = chess_pieces['blank']
+				else:
+					curr_board[move[2]+'4'] = chess_pieces['blank']
 		except:
 			pass
 		
