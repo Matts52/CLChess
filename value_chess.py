@@ -78,13 +78,14 @@ bb = [-20,-10,-10,-10,-10,-10,-10,-20,
 -10,  0,  0,  0,  0,  0,  0,-10,
 -20,-10,-10,-10,-10,-10,-10,-20]
 
-br = [  0,  0,  0,  5, 5,  0,  0,  0,
+br = [  0,  0,  0,  5,  5,  0,  0,  0,
  -5,  0,  0,  0,  0,  0,  0, -5,
  -5,  0,  0,  0,  0,  0,  0, -5,
  -5,  0,  0,  0,  0,  0,  0, -5,
  -5,  0,  0,  0,  0,  0,  0, -5,
-  5, -0, 10, 10, 10, 10, 10,  5,
-  0,  0,  0,  0,  0,  0,  0,  0]
+  5,  0, 10, 10, 10, 10, 10,  5,
+  0,  0,  0,  0,  0,  0,  0,  0,
+  0,  0,  0,  5,  5,  0,  0,  0]
   
 bq = [-20,-10,-10, -5, -5,-10,-10,-20,
 -10,  0,  0,  0,  0,  0,  0,-10,
@@ -120,9 +121,9 @@ def piece_values(piece, position, style='traditional'):
     # bug occurs where list index is out of range sometimes, todo fix this
     try:
         if style == 'advanced':
-        	#return a value which is the piece value plus any value it has for its current position
+            #return a value which is the piece value plus any value it has for its current position
             if piece == 'w_pawn':
-	            return 1 + wp[(rank*8)+file_num]/100.0
+                return 1 + wp[(rank*8)+file_num]/100.0
             elif piece == 'w_knight':
                 return 3 + wk[(rank*8)+file_num]/100.0
             elif piece == 'w_bishop':
@@ -130,7 +131,7 @@ def piece_values(piece, position, style='traditional'):
             elif piece == 'w_rook':
                 return 5 + wr[(rank*8)+file_num]/100.0
             elif piece == 'w_queen':
-        	    return 9 + wq[(rank*8)+file_num]/100.0
+                return 9 + wq[(rank*8)+file_num]/100.0
             elif piece == 'w_king':
                 return 90
             elif piece == 'b_pawn':
@@ -145,7 +146,7 @@ def piece_values(piece, position, style='traditional'):
                 return 9 + bq[(rank*8)+file_num]/100.0
             elif piece == 'b_king':
                 return 90
-    except:
+    except IndexError:
         return piece_values(piece, position, 'traditional') - 1
 
 
@@ -178,31 +179,31 @@ def calc_score(inBoard, style='traditional'):
 
 def check_insuf_mat():
 
-	Wpieces = [0,0,0,0,0]
-	Bpieces = [0,0,0,0,0]
+    Wpieces = [0,0,0,0,0]
+    Bpieces = [0,0,0,0,0]
 
-	for key in board:
-		if board[key] == chess_pieces['w_pawn']: Wpieces[0] += 1
-		elif board[key] == chess_pieces['w_knight']: Wpieces[1] += 1
-		elif board[key] == chess_pieces['w_bishop']: Wpieces[2] += 1
-		elif board[key] == chess_pieces['w_rook']: Wpieces[3] += 1
-		elif board[key] == chess_pieces['w_queen']: Wpieces[4] += 1
-		elif board[key] == chess_pieces['b_pawn']: Bpieces[0] += 1
-		elif board[key] == chess_pieces['b_knight']: Bpieces[1] += 1
-		elif board[key] == chess_pieces['b_bishop']: Bpieces[2] += 1
-		elif board[key] == chess_pieces['b_rook']: Bpieces[3] += 1
-		elif board[key] == chess_pieces['b_queen']: Bpieces[4] += 1
+    for key in board:
+        if board[key] == chess_pieces['w_pawn']: Wpieces[0] += 1
+        elif board[key] == chess_pieces['w_knight']: Wpieces[1] += 1
+        elif board[key] == chess_pieces['w_bishop']: Wpieces[2] += 1
+        elif board[key] == chess_pieces['w_rook']: Wpieces[3] += 1
+        elif board[key] == chess_pieces['w_queen']: Wpieces[4] += 1
+        elif board[key] == chess_pieces['b_pawn']: Bpieces[0] += 1
+        elif board[key] == chess_pieces['b_knight']: Bpieces[1] += 1
+        elif board[key] == chess_pieces['b_bishop']: Bpieces[2] += 1
+        elif board[key] == chess_pieces['b_rook']: Bpieces[3] += 1
+        elif board[key] == chess_pieces['b_queen']: Bpieces[4] += 1
 
-	
-	print(Wpieces)
-	
-	if Wpieces[0] == 0 and Wpieces[3] == 0 and Wpieces[4] == 0 \
-		and Bpieces[0] == 0 and Bpieces[3] == 0 and Bpieces[4] == 0 \
-		and (Wpieces[1] + Wpieces[2] < 2) and (Bpieces[1] + Bpieces[2] < 2):
-			return True
-		
-		
-	return False
+    
+    print(Wpieces)
+    
+    if Wpieces[0] == 0 and Wpieces[3] == 0 and Wpieces[4] == 0 \
+        and Bpieces[0] == 0 and Bpieces[3] == 0 and Bpieces[4] == 0 \
+        and (Wpieces[1] + Wpieces[2] < 2) and (Bpieces[1] + Bpieces[2] < 2):
+            return True
+        
+        
+    return False
 
 
 

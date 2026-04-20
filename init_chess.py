@@ -201,60 +201,60 @@ def import_fen(fenStr):
 
 
 def convert_to_FEN():
-	
-	fen_str = ''
-	
-	for key in board:
-		#add symbols in for the positions of each piece
-		if board[key] == chess_pieces['w_pawn']: fen_str = fen_str + 'P'
-		elif board[key] == chess_pieces['w_knight']: fen_str = fen_str + 'N'
-		elif board[key] == chess_pieces['w_bishop']: fen_str = fen_str + 'B'
-		elif board[key] == chess_pieces['w_rook']: fen_str = fen_str + 'R'
-		elif board[key] == chess_pieces['w_queen']: fen_str = fen_str + 'Q'
-		elif board[key] == chess_pieces['w_king']: fen_str = fen_str + 'K'
-		elif board[key] == chess_pieces['b_pawn']: fen_str = fen_str + 'p'
-		elif board[key] == chess_pieces['b_knight']: fen_str = fen_str + 'n'
-		elif board[key] == chess_pieces['b_bishop']: fen_str = fen_str + 'b'
-		elif board[key] == chess_pieces['b_rook']: fen_str = fen_str + 'r'
-		elif board[key] == chess_pieces['b_queen']: fen_str = fen_str + 'q'
-		elif board[key] == chess_pieces['b_king']: fen_str = fen_str + 'k'
-		elif board[key] == chess_pieces['blank']: fen_str = fen_str + 'z'
-		
-		if key[0] == 'H': fen_str = fen_str + '/'
-	
-	#replace blanks with number of blanks
-	fen_str = fen_str.replace('zzzzzzzz', '8')
-	fen_str = fen_str.replace('zzzzzzz', '7')
-	fen_str = fen_str.replace('zzzzzz', '6')
-	fen_str = fen_str.replace('zzzzz', '5')
-	fen_str = fen_str.replace('zzzz', '4')
-	fen_str = fen_str.replace('zzz', '3')
-	fen_str = fen_str.replace('zz', '2')
-	fen_str = fen_str.replace('z', '1')
-	
-	#cut off final slash
-	return fen_str[0:-1]
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    fen_str = ''
+    
+    for key in board:
+        #add symbols in for the positions of each piece
+        if board[key] == chess_pieces['w_pawn']: fen_str = fen_str + 'P'
+        elif board[key] == chess_pieces['w_knight']: fen_str = fen_str + 'N'
+        elif board[key] == chess_pieces['w_bishop']: fen_str = fen_str + 'B'
+        elif board[key] == chess_pieces['w_rook']: fen_str = fen_str + 'R'
+        elif board[key] == chess_pieces['w_queen']: fen_str = fen_str + 'Q'
+        elif board[key] == chess_pieces['w_king']: fen_str = fen_str + 'K'
+        elif board[key] == chess_pieces['b_pawn']: fen_str = fen_str + 'p'
+        elif board[key] == chess_pieces['b_knight']: fen_str = fen_str + 'n'
+        elif board[key] == chess_pieces['b_bishop']: fen_str = fen_str + 'b'
+        elif board[key] == chess_pieces['b_rook']: fen_str = fen_str + 'r'
+        elif board[key] == chess_pieces['b_queen']: fen_str = fen_str + 'q'
+        elif board[key] == chess_pieces['b_king']: fen_str = fen_str + 'k'
+        elif board[key] == chess_pieces['blank']: fen_str = fen_str + 'z'
+        
+        if key[0] == 'H': fen_str = fen_str + '/'
+    
+    #replace blanks with number of blanks
+    fen_str = fen_str.replace('zzzzzzzz', '8')
+    fen_str = fen_str.replace('zzzzzzz', '7')
+    fen_str = fen_str.replace('zzzzzz', '6')
+    fen_str = fen_str.replace('zzzzz', '5')
+    fen_str = fen_str.replace('zzzz', '4')
+    fen_str = fen_str.replace('zzz', '3')
+    fen_str = fen_str.replace('zz', '2')
+    fen_str = fen_str.replace('z', '1')
+    
+    #cut off final slash
+    return fen_str[0:-1]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 

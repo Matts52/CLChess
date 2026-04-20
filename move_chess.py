@@ -8,47 +8,47 @@ import init_chess as IC
 
 
 def auto_move(color, auto, autoProm=None):
-	valid_moves = get_valid_moves(color)
+    valid_moves = get_valid_moves(color)
 
 
-	if valid_moves == []:
-		print("Stalemate!")
-		exit()
+    if valid_moves == []:
+        print("Stalemate!")
+        exit()
 
-	print(en_pass_tracker)
+    print(en_pass_tracker)
 
-	en_pass_tracker[color] = ''
+    en_pass_tracker[color] = ''
 
 
     #check if auto move was valid
 
     #check if a check threat has been removed
-	if king_in_check[color]:
-		if still_in_check(color, auto):
-			return False
-		king_in_check[color] = False
+    if king_in_check[color]:
+        if still_in_check(color, auto):
+            return False
+        king_in_check[color] = False
                     
 
     #prevent a piece from performing a discovered check on its own king
-	if auto not in ['O-O', 'O-O-O'] and disc_king_in_check(color, auto):
-		return False 
-		 	
+    if auto not in ['O-O', 'O-O-O'] and disc_king_in_check(color, auto):
+        return False 
+            
  
- 	# execute the move and scan for promotion, autopromote to queen
- 	#for now for simplicity
-	exec_move(color, auto)
-	scan_promote(color, 'queen')
+    # execute the move and scan for promotion, autopromote to queen
+    #for now for simplicity
+    exec_move(color, auto)
+    scan_promote(color, 'queen')
 
-	CF.total_moves += 1
+    CF.total_moves += 1
 
-	report_king_in_check(color)
+    report_king_in_check(color)
 
-	if VC.check_insuf_mat():
-		IC.print_board()
-		print("Draw by insufficient material!")
-		exit()
+    if VC.check_insuf_mat():
+        IC.print_board()
+        print("Draw by insufficient material!")
+        exit()
 
-	return True
+    return True
 
 
 
@@ -135,7 +135,7 @@ def report_king_in_check(color):
             pos = key
 
     if pos == '':
-    	print("What the Heck!")
+        print("What the Heck!")
 
     #get the next possible moves for the same colors
     if color=='White': next_moves = get_valid_moves('White')
@@ -773,7 +773,7 @@ def exec_move(color, entered):
             else:
                 board[entered[2]+'4'] = chess_pieces['blank']
 
-    except:
+    except IndexError:
         pass
 
     #check for rook and king movement
