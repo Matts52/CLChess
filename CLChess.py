@@ -1,140 +1,44 @@
-
 import sys
-
-from config import *
-import init_chess as IC
-import value_chess as VC
-import move_chess as MC
-import AI_chess as AI
+from board import Board
+from game import Game
 
 
-# -*- coding: utf-8 -*-
+def parse_args(argv):
+    board = Board()
+    starting_turn = 0
+    white_player = 'human'
+    black_player = 'human'
 
-'''
-Todo:
-    50 move rule
-    3 repetition draw
-    furthered piece value calculation
-    move tracking
-    Better code structure
-    AI to play against
-'''
-
-
-#init pieces
-IC.init_chess_pieces()
-
-
-
-turn = 0
-fenRead = False
-autoMoves = False
-
-# read move files
-if len(sys.argv) > 1:
-    if sys.argv[1][-4:] == '.txt':
-        IC.init_board()
-        turn = IC.read_move_file(sys.argv[1])
-        autoMoves = True
-    elif sys.argv[1] == '-':
-        IC.init_board()
-        IC.print_board()
+    if len(argv) > 1:
+        arg = argv[1]
+        if arg.endswith('.txt'):
+            board.init_board()
+            starting_turn = board.read_move_file(arg) % 2
+        elif arg in ('-', 'startpos'):
+            board.init_board()
+        else:
+            board, starting_turn = Board.from_fen(arg)
     else:
-        turn = IC.import_fen(sys.argv[1])
-        IC.print_board()
-        fenRead = True
+        board.init_board()
+
+    if len(argv) > 3:
+        mode = argv[2]   # 'rand' or 'simple'
+        side = argv[3]   # 'White', 'Black', or same as mode for bot-vs-bot
+
+        if side == 'White':
+            white_player = 'human'
+            black_player = mode
+        elif side == 'Black':
+            white_player = mode
+            black_player = 'human'
+        else:
+            white_player = mode
+            black_player = side
+
+    return board, white_player, black_player, starting_turn
 
 
-
-#if we have not read a fen and not read automoves, init the board
-if not fenRead and not autoMoves:
-    IC.init_board()
-    IC.init_board()
-    IC.print_board()
-
-
-
-# if we are currently on blacks move, allow it to move before the loop
-if turn == 1:
-    #we are playing the random bot
-    if len(sys.argv) > 3:
-        if sys.argv[2] == "rand":
-            if sys.argv[3] == 'White':
-                AI.random_AI_Move('Black')
-                IC.print_board()
-            else:
-                MC.get_move('Black')
-                IC.print_board()
-        elif sys.argv[2] == 'simple':
-            if sys.argv[3] == 'White':
-                AI.simple_AI_move('Black')
-                IC.print_board()
-            else:
-                MC.get_move('Black')
-                IC.print_board()
-    #else we are playing human controlled game
-    else:
-        MC.get_move('Black')
-        IC.print_board()
-
-
-
-
-#play the game
-
-#playing vs simple bot
-if len(sys.argv) > 3 and sys.argv[2] == "simple":
-    if sys.argv[3] == 'simple':
-        for i in range(0,4):
-            AI.simple_AI_move("White")
-            IC.print_board()
-            AI.simple_AI_move("Black")
-            IC.print_board()
-    
-    elif sys.argv[3] == 'White':
-        while(1):
-            MC.get_move('White')
-            IC.print_board()
-            AI.simple_AI_move('Black')
-            IC.print_board()
-    else:
-        while(1):
-            AI.simple_AI_move('White')
-            IC.print_board()
-            MC.get_move('Black')
-            IC.print_board()
-
-
-#playing vs random bot
-if len(sys.argv) > 3 and sys.argv[2] == "rand":
-    if sys.argv[3] == 'rand':
-        while(1):
-            AI.random_AI_move("White")
-            IC.print_board()
-            AI.random_AI_move("Black")
-            IC.print_board()
-    
-    elif sys.argv[3] == 'White':
-        while(1):
-            MC.get_move('White')
-            IC.print_board()
-            AI.random_AI_move('Black')
-            IC.print_board()
-    else:
-        while(1):
-            AI.random_AI_move('White')
-            IC.print_board()
-            MC.get_move('Black')
-            IC.print_board()
-
-
-#playing human vs human
-while(1):
-    MC.get_move('White')
-    IC.print_board()
-    MC.get_move('Black')
-    IC.print_board()
-
-
-
-
+if __name__ == '__main__':
+    board, white_player, black_player, starting_turn = parse_args(sys.argv)
+    game = Game(board, white_player, black_player, starting_turn)
+    game.play()
